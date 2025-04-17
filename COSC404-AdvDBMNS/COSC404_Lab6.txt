@@ -1,0 +1,54 @@
+Part One
+Exercise - ROWID:
+1. The output of the 18-character ROWID consists of the data object, the data block,
+the row number within the block, a file number, tablespace, and database number
+
+2. the data object number and the file number are different.
+
+Exercise - Creating Indexes:
+1.  CREATE INDEX composite_index_name
+	ON Lab_Pro_Dens;
+2. index_name: shows the name of the index
+   visibility: whether or not the index is invisible
+   tablespace_name: the tablespace name that the index is stored
+   blevel: the height of the index tree. Root block = level 1, its children are level 2 etc
+   leaf_blocks: the total number of leaf blocks in the index
+   
+Exercise - Adding a primary key:
+1.  CREATE INDEX cred_index
+	ON Lab_Pro_Dens (Credential, Cred_Date);
+2. The visibility of the index changes from visible to invisible after adding the primary key. This
+Happens because when you add a primary key constraint, oracle will auto create a unique index which enforces
+the PK.
+
+Exercise - Explain Plan for...:
+
+
+PArt 2: partitioned tables:
+
+Exercise - List Partitioning:
+1. PARTITION BY LIST (Credential)
+(
+    PARTITION bachelors VALUES ('BDS', 'BDSc'),
+    PARTITION doctors VALUES ('DDS', 'DMD'),
+    PARTITION general VALUES ('GPR'),
+    PARTITION unknown_cred VALUES (DEFAULT)
+);
+
+2. Inserting rows under the partition shouldnt affect space usage in a meaningful manner
+
+3. Inserting all rows will consume a lot more space, so space usage increased in accordance with thatd
+
+4. No, it would not give back all the space. To release it we have to execute a 'DROP TABLE' and 'PURGE'
+statement
+
+Exercise - Range Partitioning:
+1. PARTITION BY RANGE (Cred_Date)
+(
+    PARTITION before_2011 VALUES LESS THAN (TO_DATE('2011-01-01', 'YYYY-MM-DD')) SEGMENT CREATION IMMEDIATE,
+    PARTITION in_2011 VALUES LESS THAN (TO_DATE('2012-01-01', 'YYYY-MM-DD')) SEGMENT CREATION IMMEDIATE,
+    PARTITION in_2012 VALUES LESS THAN (TO_DATE('2013-01-01', 'YYYY-MM-DD')) SEGMENT CREATION IMMEDIATE,
+    PARTITION in_2013 VALUES LESS THAN (TO_DATE('2014-01-01', 'YYYY-MM-DD')) SEGMENT CREATION IMMEDIATE,
+    PARTITION in_2014 VALUES LESS THAN (TO_DATE('2015-01-01', 'YYYY-MM-DD')) SEGMENT CREATION IMMEDIATE,
+    PARTITION other_dates VALUES LESS THAN (MAXVALUE) SEGMENT CREATION IMMEDIATE
+);
