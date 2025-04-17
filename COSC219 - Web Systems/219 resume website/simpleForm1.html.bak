@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Jacob's Simple Form</title>
+	</head>
+	<body>
+		<h1 color = "blue">Back To <a href = "index.html">HOME</a></h1>
+		<br>
+		<h2><strong>HTML Forms</strong></h2>
+		<br>
+		
+		<p>The three types of validation on this page are:
+			<ol>
+				<li>Alert Box</li>
+				<li>Bottom Text</li>
+				<li>Built-in callout</li>
+			</ol>
+			<form name="myForm" onsubmit="return validateForm()" method="post" action = "/form.php">
+				<label for="fname">First Name:</label><br>
+				<input type="text" id="fname" name="fname"><br>
+				
+				<label for="lname">Last Name:</label><br>
+				<input type="text" id="lname" name="lname"><br>
+				<p id="isValid"></p>
+				
+				<label for="email">Email:</label><br>
+				<input type="email" id="email" name="email" required><br>
+				
+				
+				<input type="submit" value="submit">
+			</form>
+			
+			If you click the "submit" button, the data will be sent to a page called "form.php"
+		</p>
+		
+		<h2><strong>REPORT: Output of all table rows</strong></h2>
+		<br>
+		<a href = "report_data.php">Get the data from the table</a>
+		
+		<script>
+			function validateForm(){
+				let x = document.forms["myForm"]["fname"].value;
+				let y = document.forms["myForm"]["lname"].value;
+				let z = document.forms["myForm"]["email"].value;
+				//fname
+				if(x === ""){
+					alert("Name must be filled out");
+					return false;
+				}
+				
+				
+				//lname
+				let text;
+				
+				if(y === ""){
+					text = "Input not valid";
+					document.getElementById("isValid").innerHTML = text;
+					return false;
+					
+				}else{
+					text = "Input OK";
+				}
+				document.getElementById("isValid").innerHTML = text;
+			}
+		</script>
+
+	</body>
+</html>

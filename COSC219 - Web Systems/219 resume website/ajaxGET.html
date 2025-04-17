@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>AJAX GET</title>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	
+	<body>
+	<div class="container">
+			<div class="navbar">
+				<img src="images/logo.png" class="logo">
+				<nav>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="projects.html">Projects</a>
+							<ul>
+									<li><a href="simpleForm1.html">Form Validation</a></li>
+									
+									<li><a href = "ajaxDemoPage.html">AJAX GET and POST</a></li>
+									
+									<li><a href = "snakeGame.html">Snake Game</a></li>
+									
+							</ul>
+						</li>
+						<li><a href="about.html">About Me</a></li>
+						<li><a href="https://jacobeliasrawlings.wordpress.com/">Blog</a></li>
+					</ul>
+				</nav>
+			</div>
+			<br>
+		<a href = "ajaxDemoPage.html">Ajax Demo Page</a>
+		<h1>AJAX GET Demo</h1>	
+		<p>---------------------------------------------</p>
+		<br>
+		<h2>Responses from server</h2>
+		<div id="ready1"></div>
+		<div id="ready2"></div>
+		<div id="ready3"></div>
+		<div id="ready4"></div>
+		<div id="demo">
+			<button type = "button" onclick="loadDoc()">Responses from server</button>
+		</div>
+		</div>
+		<script>
+			function loadDoc(){
+				const xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function(){
+					if (this.readyState == 1 ) {
+						document.getElementById("ready1").innerHTML = "Readystate = 1 and server connection established";
+					}
+					if (this.readyState == 2 ) {
+						document.getElementById("ready2").innerHTML =
+						"Readystate = 2 and Request has been received.";
+					}
+					if (this.readyState == 3 ) {
+						document.getElementById("ready3").innerHTML =
+						"Readystate = 3 and Request is being processed.";
+					}
+					if (this.readyState == 4 ) {
+						document.getElementById("ready4").innerHTML =
+						"Readystate = 4 and Request finished and Response is ready. ";
+					}
+					if(this.readyState == 4 && this.status == 200){
+						document.getElementById("demo").innerHTML = this.responseText;
+						document.getElementById("callback").innerHTML = "My Callback Trigger!";
+					}
+				};
+				xhttp.open("GET", "ajax_info.txt");
+				xhttp.send();
+				
+			}
+		</script>
+		<p>---------------------------------------------</p>
+		<br>
+		<p>Details of callback function</p>
+		<p id="callback"></p>
+		
+	</body>
+</html>

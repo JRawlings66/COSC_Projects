@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>AJAX Post demo</title>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	
+	<body>
+	<div class="container">
+			<div class="navbar">
+				<img src="images/logo.png" class="logo">
+				<nav>
+					<ul>
+						<li><a href="index.html">Home</a></li>
+						<li><a href="projects.html">Projects</a>
+							<ul>
+									<li><a href="simpleForm1.html">Form Validation</a></li>
+									
+									<li><a href = "ajaxDemoPage.html">AJAX GET and POST</a></li>
+									
+									<li><a href = "snakeGame.html">Snake Game</a></li>
+									
+							</ul>
+						</li>
+						<li><a href="about.html">About Me</a></li>
+						<li><a href="https://jacobeliasrawlings.wordpress.com/">Blog</a></li>
+					</ul>
+				</nav>
+			</div>
+		<a href = "ajaxDemoPage.html">AJAX Demo Page</a>
+		
+		<h1>AJAX using POST method</h1>
+		
+		<button type="button" onclick="loadDoc()">Request data with POST</button>
+		
+		<p id="demo"></p>
+		</div>
+		<script>
+			function loadDoc(){
+				const xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function(){
+					if(this.readyState == 4 && this.status == 200){
+						document.getElementById("demo").innerHTML = this.responseText;
+					}
+				};
+				xhttp.open("POST", "form.php");
+				xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xhttp.send("fname=Henry&lname=Ford&email=hford@ford.com");
+			}
+		</script>
+	</body>
+</html>

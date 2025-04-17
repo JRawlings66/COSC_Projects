@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Jacob Rawlings Resume</title>
+		<link rel="stylesheet" href="styles.css">
+	</head>
+	<body>
+		<div class="container">
+			
+			<div class="navbar">
+				<img src="images/logo.png" class="logo">
+				<nav>
+					<div class="nav-dropdown">
+						<ul>
+							<li><a href="index.html">Home</a></li>
+							<li><a href="projects.html">Projects</a>
+								<ul>
+									<li><a href="simpleForm1.html">Form Validation</a></li>
+									
+									<li><a href = "ajaxDemoPage.html">AJAX GET and POST</a></li>
+									
+									<li><a href = "snakeGame.html">Snake Game</a></li>
+									
+								</ul>
+							</li>
+							<li><a href="about.html">About Me</a></li>
+							<li><a href="https://jacobeliasrawlings.wordpress.com/">Blog</a></li>
+						</ul>
+					</div>
+				</nav>
+			</div>
+			<div class="content">
+				<h1>Welcome to my resume website!</h1>
+				<a href="projects.html" class="btn">Projects</a>
+				<br>
+				<p>On this site you will find: some information about me, demonstrations of form validation, AJAX Get and POST, <br> some Jquery functionality, a link to my blog, 
+				a simple JavaScript Game, and some other projects I have done in the past.
+				</p>
+			</div>
+			<br>
+			<br>
+			
+			<button class="fade">Image Toggle</button>
+			<div class="img-w-text">
+				<p id="text">A photo taken from my time at the Blanket Glacier</p>
+				<br>
+				<img src="images/blanketpic.jpg" id="home-image">
+			</div>
+			
+			
+			
+			</ul>
+		</div>
+			<script
+			  src="https://code.jquery.com/jquery-3.2.1.min.js"
+			  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+			  crossorigin="anonymous"></script>
+			<script src="main.js"></script>
+	</body>
+</html>
