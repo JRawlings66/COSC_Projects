@@ -1,0 +1,148 @@
+CREATE TABLE Store (
+    store_ID INT AUTO_INCREMENT PRIMARY KEY,
+    store_name VARCHAR(100),
+    location VARCHAR(100),
+    phone_number VARCHAR(15),
+    date_established DATE
+);
+
+CREATE TABLE Employee (
+    employee_ID INT AUTO_INCREMENT PRIMARY KEY,
+    f_name VARCHAR(50),
+    l_name VARCHAR(50),
+    position VARCHAR(50),
+    date_hired DATE,
+    salary DECIMAL(10, 2),
+    store_ID INT,
+    FOREIGN KEY (store_ID) REFERENCES Store(store_ID)
+);
+
+CREATE TABLE Manager_History (
+    history_ID INT AUTO_INCREMENT PRIMARY KEY,
+    employee_ID INT,
+    store_ID INT,
+    start_date DATE,
+    end_date DATE,
+    status VARCHAR(20),
+    FOREIGN KEY (employee_ID) REFERENCES Employee(employee_ID),
+    FOREIGN KEY (store_ID) REFERENCES Store(store_ID)
+);
+
+CREATE TABLE Brand (
+    brand_ID INT AUTO_INCREMENT PRIMARY KEY,
+    brand_name VARCHAR(100),
+    HQ_location VARCHAR(100),
+    date_established DATE
+);
+
+CREATE TABLE Category (
+    category_ID INT AUTO_INCREMENT PRIMARY KEY,
+    category_name VARCHAR(50)
+);
+
+CREATE TABLE Supplier (
+    supplier_ID INT AUTO_INCREMENT PRIMARY KEY,
+    supplier_name VARCHAR(100),
+    email VARCHAR(100),
+    phone_number VARCHAR(15),
+    HQ_location VARCHAR(100)
+);
+
+CREATE TABLE Warehouse (
+    warehouse_ID INT AUTO_INCREMENT PRIMARY KEY,
+    warehouse_name VARCHAR(100),
+    location VARCHAR(100),
+    capacity INT
+);
+
+CREATE TABLE Product (
+    product_ID INT AUTO_INCREMENT PRIMARY KEY,
+    product_name VARCHAR(100),
+    base_price DECIMAL(10, 2),
+    brand_ID INT,
+    category_ID INT,
+    FOREIGN KEY (brand_ID) REFERENCES Brand(brand_ID),
+    FOREIGN KEY (category_ID) REFERENCES Category(category_ID)
+);
+
+CREATE TABLE Customer (
+    customer_ID INT AUTO_INCREMENT PRIMARY KEY,
+    f_name VARCHAR(50),
+    l_name VARCHAR(50),
+    address VARCHAR(150),
+    email VARCHAR(100),
+    phone_number VARCHAR(15),
+    loyalty_status BOOLEAN
+);
+
+CREATE TABLE Sales_Transaction_Log (
+    transaction_ID INT AUTO_INCREMENT PRIMARY KEY,
+    date DATE,
+    total DECIMAL(10, 2),
+    customer_ID INT,
+    store_ID INT,
+    FOREIGN KEY (customer_ID) REFERENCES Customer(customer_ID),
+    FOREIGN KEY (store_ID) REFERENCES Store(store_ID)
+);
+
+CREATE TABLE WH_Resupply_Log (
+    resupply_ID INT AUTO_INCREMENT PRIMARY KEY,
+    date DATE,
+    quantity INT,
+    purchase_price DECIMAL(10, 2),
+    product_ID INT,
+    warehouse_ID INT,
+    supplier_ID INT,
+    FOREIGN KEY (product_ID) REFERENCES Product(product_ID),
+    FOREIGN KEY (warehouse_ID) REFERENCES Warehouse(warehouse_ID),
+    FOREIGN KEY (supplier_ID) REFERENCES Supplier(supplier_ID)
+);
+
+CREATE TABLE Store_Resupply_Log (
+    resupply_ID INT AUTO_INCREMENT PRIMARY KEY,
+    date DATE,
+    quantity INT,
+    product_ID INT,
+    store_ID INT,
+    warehouse_ID INT,
+    FOREIGN KEY (product_ID) REFERENCES Product(product_ID),
+    FOREIGN KEY (store_ID) REFERENCES Store(store_ID),
+    FOREIGN KEY (warehouse_ID) REFERENCES Warehouse(warehouse_ID)
+);
+
+CREATE TABLE Supplier_Product_BRIDGE (
+    supplier_ID INT,
+    product_ID INT,
+    purchase_price DECIMAL(10, 2),
+    quantity INT,
+    PRIMARY KEY (supplier_ID, product_ID),
+    FOREIGN KEY (supplier_ID) REFERENCES Supplier(supplier_ID),
+    FOREIGN KEY (product_ID) REFERENCES Product(product_ID)
+);
+
+CREATE TABLE Category_Product_BRIDGE (
+    category_ID INT,
+    product_ID INT,
+    PRIMARY KEY (category_ID, product_ID),
+    FOREIGN KEY (category_ID) REFERENCES Category(category_ID),
+    FOREIGN KEY (product_ID) REFERENCES Product(product_ID)
+);
+
+CREATE TABLE Store_Product_BRIDGE (
+    store_ID INT,
+    product_ID INT,
+    selling_price DECIMAL(10, 2),
+    PRIMARY KEY (store_ID, product_ID),
+    FOREIGN KEY (store_ID) REFERENCES Store(store_ID),
+    FOREIGN KEY (product_ID) REFERENCES Product(product_ID)
+);
+
+CREATE TABLE Transaction_Details_BRIDGE (
+    transaction_ID INT,
+    product_ID INT,
+    quantity INT,
+    sale_price DECIMAL(10, 2),
+    PRIMARY KEY (transaction_ID, product_ID),
+    FOREIGN KEY (transaction_ID) REFERENCES Sales_Transaction_Log(transaction_ID),
+    FOREIGN KEY (product_ID) REFERENCES Product(product_ID)
+);

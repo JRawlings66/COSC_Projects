@@ -1,0 +1,127 @@
+INSERT INTO Store (store_name, location, phone_number, date_established)
+VALUES 
+('FTS Charlie', '123 Main St, Vernon', '555-1234', '2020-01-01'),
+('FTS Echo', '456 Oak St, Salmon Arm', '555-5678', '2019-06-15'),
+('FTS Alpha', '789 Maple St, Kelowna', '555-9012', '2021-03-22'),
+('FTS Bravo', '321 Pine St, Penticton', '555-3456', '2018-11-11'),
+('FTS Roger', '654 Cedar St, Coldstream', '555-7890', '2022-05-10');
+
+INSERT INTO Employee (f_name, l_name, position, date_hired, salary, store_ID)
+VALUES 
+('Alex', 'Jones', 'Manager', '2020-04-15', 51000, 1),
+('Megan', 'Clark', 'Cashier', '2019-06-17', 33000, 3),
+('Ella', 'Williams', 'Manager', '2021-04-09', 59000, 2),
+('Lucas', 'Miller', 'Merchandise', '2020-09-12', 32000, 5),
+('Sophie', 'Davis', 'Cashier', '2022-07-25', 61000, 4);
+
+INSERT INTO Manager_History (employee_ID, store_ID, start_date, end_date, status)
+VALUES 
+(1, 1, '2020-04-15', NULL, 'Active'),
+(3, 2, '2021-04-09', NULL, 'Active'),
+(5, 4, '2022-07-25', NULL, 'Active'),
+(2, 3, '2019-06-17', '2022-01-10', 'Resigned'),
+(4, 5, '2020-09-12', NULL, 'Active');
+
+INSERT INTO Brand (brand_name, HQ_location, date_established)
+VALUES 
+('Christie', 'Los Angeles, CA', '1998-02-20'),
+('Presidents Choice', 'Houston, TX', '2005-06-11'),
+('No Name', 'Phoenix, AZ', '1993-09-09'),
+('Bohnson & Bohnson', 'San Diego, CA', '2012-04-22'),
+('Big Soap', 'Dallas, TX', '2018-08-30');
+
+INSERT INTO Category (category_name)
+VALUES 
+('Dairy'),
+('Snacks'),
+('Beverages'),
+('Frozen Foods'),
+('Bakery');
+
+INSERT INTO Supplier (supplier_name, email, phone_number, HQ_location)
+VALUES 
+('Green Fields', 'info@greenfields.com', '555-8801', 'Denver, CO'),
+('Metro Foods', 'contact@metrofoods.com', '555-4412', 'Chicago, IL'),
+('Global Grocers', 'support@globalgrocers.com', '555-3113', 'New York, NY'),
+('FarmFresh Ltd', 'sales@farmfresh.com', '555-9921', 'Atlanta, GA'),
+('Tropical Harvest', 'service@tropicalharvest.com', '555-1235', 'Orlando, FL');
+
+INSERT INTO Warehouse (warehouse_name, location, capacity)
+VALUES 
+('Main Warehouse', 'Industrial Rd, City A', 15000),
+('Southside Warehouse', 'South Ave, City B', 11000),
+('North Warehouse', 'Northern Blvd, City C', 17000),
+('East Warehouse', 'Eastside St, City D', 8500),
+('West Warehouse', 'Westside St, City E', 13500);
+
+INSERT INTO Product (product_name, base_price, brand_ID, category_ID)
+VALUES 
+('Whole Milk', 3.25, 1, 1),
+('Salted Chips', 1.75, 2, 2),
+('Organic Orange Juice', 5.00, 3, 3),
+('Frozen Lasagna', 8.50, 4, 4),
+('Fresh Bread', 2.25, 5, 5);
+
+INSERT INTO Customer (f_name, l_name, address, email, phone_number, loyalty_status)
+VALUES 
+('Jacob', 'Rawlings', '111 Maple St, City A', 'j.rawlings@example.com', '555-9213', TRUE),
+('Mohamed', 'K', '222 Birch St, City B', 'moh.k@example.com', '555-7534', FALSE),
+('Youry', 'Khilms', '333 Oak St, City C', 'youryyoury@example.com', '555-8912', TRUE),
+('Big', 'Chungus', '444 Elm St, City D', 'carrotmail@example.com', '555-1247', TRUE),
+('Elon', 'Busk', '555 Pine St, City E', 'teslaisme@example.com', '555-6743', FALSE);
+
+INSERT INTO Sales_Transaction_Log (date, total, customer_ID, store_ID)
+VALUES 
+('2023-07-01', 22.75, 1, 1),
+('2023-07-12', 45.90, 2, 3),
+('2023-07-15', 16.40, 3, 2),
+('2023-07-20', 38.50, 4, 4),
+('2023-07-25', 54.25, 5, 5);
+
+INSERT INTO WH_Resupply_Log (date, quantity, purchase_price, product_ID, warehouse_ID, supplier_ID)
+VALUES 
+('2023-06-10', 650, 3.10, 1, 1, 1),
+('2023-06-12', 400, 1.60, 2, 2, 2),
+('2023-06-15', 500, 4.75, 3, 3, 3),
+('2023-06-20', 750, 7.00, 4, 4, 4),
+('2023-06-22', 900, 2.00, 5, 5, 5);
+
+INSERT INTO Store_Resupply_Log (date, quantity, product_ID, store_ID, warehouse_ID)
+VALUES 
+('2023-06-25', 120, 1, 1, 1),
+('2023-06-26', 60, 2, 2, 2),
+('2023-06-27', 85, 3, 3, 3),
+('2023-06-28', 200, 4, 4, 4),
+('2023-06-29', 230, 5, 5, 5);
+
+INSERT INTO Supplier_Product_BRIDGE (supplier_ID, product_ID, purchase_price, quantity)
+VALUES 
+(1, 1, 3.10, 650),
+(2, 2, 1.60, 400),
+(3, 3, 4.75, 500),
+(4, 4, 7.00, 750),
+(5, 5, 2.00, 900);
+
+INSERT INTO Category_Product_BRIDGE (category_ID, product_ID)
+VALUES 
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4),
+(5, 5);
+
+INSERT INTO Store_Product_BRIDGE (store_ID, product_ID, selling_price)
+VALUES 
+(1, 1, 3.50),
+(2, 2, 1.85),
+(3, 3, 5.20),
+(4, 4, 8.90),
+(5, 5, 2.45);
+
+INSERT INTO Transaction_Details_BRIDGE (transaction_ID, product_ID, quantity, sale_price)
+VALUES 
+(1, 1, 2, 3.50),
+(2, 2, 3, 1.85),
+(3, 3, 1, 5.20),
+(4, 4, 4, 8.90),
+(5, 5, 3, 2.45);
