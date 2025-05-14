@@ -1,0 +1,7 @@
+1. CALL apoc.import.csv(
+[{fileName: 'file:/Album.csv', labels: ['Album']}], 
+[{fileName: 'file:/Artist.csv', label: ['Artist'], type:'CREATES'}], 
+{delimiter: '|', arrayDelimiter: ',', stringIds: false}) 
+YIELD nodes, relationships, errorMessages 
+UNWIND relationships as rel 
+RETURN nodes, rel, errorMessages
