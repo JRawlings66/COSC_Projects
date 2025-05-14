@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="calculator"
+            type="com.example.cosc326_lab7.CalculatorModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <EditText
+            android:id="@+id/inputA"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@={calculator.a}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/inputB"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@={calculator.b}"
+            app:layout_constraintTop_toBottomOf="@id/inputA"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <EditText
+            android:id="@+id/inputC"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@={calculator.c}"
+            app:layout_constraintTop_toBottomOf="@id/inputB"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:id="@+id/solveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/solve_it"
+            android:backgroundTint="#2caa19"
+            app:layout_constraintTop_toBottomOf="@id/inputC"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/resultView"
+            android:layout_marginTop="16dp"
+            android:onClick="@{() -> calculator.calculateResult()}" />
+
+        <TextView
+            android:id="@+id/resultView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@{calculator.result}"
+            android:textStyle="bold"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/solveButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
